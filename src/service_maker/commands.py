@@ -45,8 +45,6 @@ class Create(Command):
             section = ""
             if param.startswith('_'):
                 continue
-            if not values:
-                continue
             if param in datas['Unit']:
                 section = 'Unit'
             if param in datas['Service']:
@@ -57,12 +55,16 @@ class Create(Command):
                 section = 'Meta'
             if not section:
                 continue
-            for v in values:
-                if section == 'Meta':
-                    ordered_args[section][param] = v
-                else:
-                    line = param + '=' + v
-                    ordered_args[section].append(line)
+            if not values:
+                line = "# " + param + '='
+                ordered_args[section].append(line)
+            else:
+                for v in values:
+                    if section == 'Meta':
+                        ordered_args[section][param] = v
+                    else:
+                        line = param + '=' + v
+                        ordered_args[section].append(line)
         write_service(ordered_args)
         return self.arg_np.Name
 

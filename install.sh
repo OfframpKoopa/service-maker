@@ -5,4 +5,4 @@
 
 poetry install
 
-pipx install .
+pipx install . --force
