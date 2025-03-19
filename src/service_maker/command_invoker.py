@@ -27,5 +27,7 @@ class CommandInvoker:
         if arg_np.action == "update":
             command = Update(arg_np)
 
+        if not command:
+            raise Exception(f"Command {arg_np.action} unexpectedly failed.")
         return command
 
