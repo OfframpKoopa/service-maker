@@ -5,6 +5,13 @@ import uuid
 
 
 class FileHelper:
+    """
+    FileHelper handles all operations file related.
+    Every operation is first done on either a copy of the existing
+    service in a local temp file, or in a new temp file.
+    After the file is written, the file is moved into the systemd
+    service directory.
+    """
 
     def _overwrite(self, filename: str) -> None:
         with open(filename, 'w') as f:
@@ -43,12 +50,8 @@ class FileHelper:
                 for line in ordered_args[section]:
                     f.write(line + '\n')
 
-    def create(self, filename:str, ordered_args: dict) -> None:
-        fn = filename
-        if self._service_exists(fn):
-            tmp_fn = self._make_tmp_copy(fn)
-        else:
-            tmp_fn = self._make_tmp(fn)
+    def create(self, fn: str, ordered_args: dict) -> None:
+        tmp_fn = self._make_tmp(fn)
         self._overwrite(tmp_fn)
         self._write_sections(tmp_fn, ordered_args)
         self._merge(tmp_fn, fn)
