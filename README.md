@@ -12,9 +12,12 @@ functionnality
 
 ## A Simple Example
 
+### Command
 ```bash
 service-maker create --Name "Test" --ExecStart "echo HelloWorld"
 ```
+
+### Output in /etc/systemd/system/Test
 
 ```service file
 [Unit]
