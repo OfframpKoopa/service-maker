@@ -16,6 +16,99 @@ functionnality
 service-maker create --Name "Test" --ExecStart "echo HelloWorld"
 ```
 
+```service file
+[Unit]
+# Description=
+# Documentation=
+# Requires=
+# Wants=
+# BindsTo=
+# Before=
+# After=
+# Conflicts=
+# ConditionArchitecture=
+# ConditionVirtualization=
+# ConditionKernelCommandLine=
+# ConditionSecurity=
+# AssertArchitecture=
+# AssertVirtualization=
+# AssertKernelCommandLine=
+# AssertSecurity=
+# OnFailure=
+# OnSuccess=
+# IgnoreOnIsolate=
+# JobTimeoutSec=
+# JobTimeoutAction=
+# StartLimitIntervalSec=
+# StartLimitBurst=
+# StartLimitAction=
+# RefuseManualStart=
+# RefuseManualStop=
+[Service]
+# Type=
+ExecStart=echo HelloWorld
+# ExecStartPre=
+# ExecStartPost=
+# ExecReload=
+# ExecStop=
+# ExecStopPost=
+# RestartSec=
+# Restart=
+# TimeoutStartSec=
+# TimeoutStopSec=
+# TimeoutSec=
+# WatchdogSec=
+# RemainAfterExit=
+# PIDFile=
+# User=
+# Group=
+# WorkingDirectory=
+# RootDirectory=
+# RuntimeDirectory=
+# RuntimeDirectoryMode=
+# Environment=
+# EnvironmentFile=
+# StandardOutput=
+# StandardError=
+# SyslogIdentifier=
+# SyslogFacility=
+# SyslogLevel=
+# LimitCPU=
+# LimitFSIZE=
+# LimitDATA=
+# LimitSTACK=
+# LimitCORE=
+# LimitRSS=
+# LimitNOFILE=
+# LimitAS=
+# LimitNPROC=
+# LimitMEMLOCK=
+# LimitLOCKS=
+# LimitSIGPENDING=
+# LimitMSGQUEUE=
+# LimitNICE=
+# LimitRTPRIO=
+# OOMScoreAdjust=
+# IOSchedulingClass=
+# IOSchedulingPriority=
+# CPUSchedulingPolicy=
+# CPUSchedulingPriority=
+# CPUAffinity=
+# ProtectSystem=
+# ProtectHome=
+# NoNewPrivileges=
+# ReadOnlyPaths=
+# ReadWritePaths=
+# InaccessiblePaths=
+# CapabilityBoundingSet=
+[Install]
+# WantedBy=
+# RequiredBy=
+# Also=
+# Alias=
+```
+
+
 ## Installation 
 
 I recommend you use pipx to install the software "globally".
