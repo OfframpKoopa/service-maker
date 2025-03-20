@@ -18,12 +18,12 @@ def main() -> None:
     db = build_db()
     invoker = CommandInvoker(db)
     command = invoker.get_command()
-
-    try:
-        command.execute()
-        print(f"{command.arg_np.Name} successfully created/updated.")
-    except Exception as e:
-        print(f"[error] ServiceMaker encountered following issu: {e}")
+    command.execute()
+#    try:
+#        command.execute()
+#        print(f"{command.arg_np.Name} successfully created/updated.")
+#    except Exception as e:
+#        print(f"[error] ServiceMaker encountered following issue: {e}")
 
 
 if __name__ == '__main__':
