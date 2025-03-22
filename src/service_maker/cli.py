@@ -26,18 +26,14 @@ def main() -> None:
     class to perform any kind of operations.
     """
 
-    doc_reference_data = get_doc_reference_data()
-    doc_reference = DocReference(doc_reference_data)
+    doc_reference = DocReference()
 
     arg_np = get_arg_namespace(doc_reference)
     directives = Directives(vars(arg_np))
 
-    unit_adapter = UnitAdapter(directives, doc_reference)
-
+    unit_adapter = UnitAdapter(directives)
     action = directives.get("action", [""])[0]
-
     command = command_invoker.get_command(action)
-
     command.execute(unit_adapter)
 
 #    try:

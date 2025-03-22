@@ -3,12 +3,6 @@ import json
 from service_maker.utils import get_arg_namespace
 from service_maker.doc_reference import DocReference
 
-from service_maker.systemd_parser import (
-    DirectivesConverter, 
-    SectionsConverter,
-    RawServiceConverter
-)
-
 from service_maker.models import (
     Directives,
     Sections,
@@ -41,9 +35,9 @@ class UnitAdapter:
     other steps than initializing it.
 
     """
-    def __init__(self, model, doc_reference: DocReference) -> None:
-        self.doc_reference = doc_reference
-        self.sections_keys = {"Unit", "Service", "Install"}
+    def __init__(self, model) -> None:
+        self.doc_reference = DocReference()
+        self.sections_keys = ["Unit", "Service", "Install"]
 
         self._sections = None
         self._directives = None
@@ -129,6 +123,7 @@ class UnitAdapter:
                 }
             }
         for key in self.sections_keys:
+            print(key)
             raw_sections[key] = {} 
             for directive in self.doc_reference.get(key, ""):
                 if not directive in self._directives.keys():
@@ -191,4 +186,7 @@ class UnitAdapter:
 
     def get_raw_service(self) -> RawService:
         return self._raw_service
+    
+    def get_metadatas(self) -> dict:
+        return self.get_sections()["Meta"]
 
