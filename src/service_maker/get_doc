@@ -1,0 +1,52 @@
+import json
+import os
+
+from service_maker.utils import get_arg_namespace
+
+
+def get_doc_reference_data(filename: str = "doc_reference.json") -> dict:
+    base_path = os.path.dirname(__file__)
+    doc_reference_path = os.path.join(base_path, filename)
+    with open(doc_reference_path, "r") as f:
+        return json.load(f)
+
+
+class DocReference:
+    """
+    Data type class meant to handle the doc reference object
+    with stronger typing, validation and immutability than 
+    passing a dict around.
+    """
+    def __init__(self, data: dict) -> None:
+        for k, v in data.items():
+            if isinstance(v, dict):
+                v = DocReference(v)
+            setattr(self, k, v)
+
+    def __getitem__(self, key):
+        return getattr(self, key)
+                
+    def __repr__(self):
+        return repr(vars(self))
+
+    def __str__(self):
+        return str(vars(self))
+
+
+def main() -> None:
+    doc_reference_data = get_doc_reference_data()
+    doc_reference = DocReference(doc_reference_data)
+    #arg_np = get_arg_namespace(db)
+    #action = getattr(arg_np, "action", "")
+    #invoker = CommandInvoker()
+    #command = invoker.get_command(action)
+    #command.execute(arg_np)
+#    try:
+#        command.execute()
+#        print(f"{command.arg_np.Name} successfully created/updated.")
+#    except Exception as e:
+#        print(f"[error] ServiceMaker encountered following issue: {e}")
+
+
+if __name__ == '__main__':
+    main()

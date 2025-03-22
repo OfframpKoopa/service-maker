@@ -8,13 +8,14 @@ authors = [
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
+    "attrs (>=25.3.0,<26.0.0)"
 ]
 
 [tool.poetry]
 packages = [{include = "service_maker", from = "src"}]
 
 [tool.poetry.scripts]
-service-maker = "service_maker.main:main"
+service-maker = "service_maker.cli:main"
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
