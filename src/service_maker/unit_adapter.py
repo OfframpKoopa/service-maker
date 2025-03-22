@@ -89,7 +89,7 @@ class UnitAdapter:
             line = line.strip("# ")
             line = line.strip("\n")
             line = line.split("=")
-            raw_directives[line[0]] = [line[1]] if line[1] else None
+            raw_directives[line[0]] = [line[1]] if len(line) > 1 else None
 
         return Directives(raw_directives)
 
