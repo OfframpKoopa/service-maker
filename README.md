@@ -12,7 +12,7 @@ It also writes into the file all of the parameters for each section,
 so the user don't have to guess or go to the documentation for a specific
 functionnality
 
-## Concept
+## Usage
 
 The idea is to basically use the service-maker commands followed by 
 the name and values of the directives we want in our service config
