@@ -1,5 +1,20 @@
 # Service Maker 
 
+## Developpment Stage
+
+!! Wait a minute !!
+
+This software is functionnal, but pretty basic right now. Consider this the alpha version of it.
+Basically, next steps are : 
+
+- Test coverage
+- CICD
+
+- ServiceMaker class that would streamline the usage of the program.
+- Refactoring of the cli.py with the ServiceMaker
+
+- Let's integrate your idea ?
+
 ## Description
 
 Service Maker is a lightweight program that acts as a CLI to create and
