@@ -1,7 +1,7 @@
 
 import service_maker.command_invoker as command_invoker
 
-from service_maker.utils import get_arg_namespace, get_doc_reference_data
+from service_maker.utils import get_arg_namespace
 from service_maker.doc_reference import DocReference
 from service_maker.unit_adapter import UnitAdapter
 from service_maker.models import Directives
@@ -25,9 +25,7 @@ def main() -> None:
     The UnitAdapter will allow any Commands
     class to perform any kind of operations.
     """
-    doc_reference = DocReference()
-
-    arg_np = get_arg_namespace(doc_reference)
+    arg_np = get_arg_namespace()
     directives = Directives(vars(arg_np))
 
     service = UnitAdapter(directives)
