@@ -1,6 +1,6 @@
 # Service Maker 
 
-## Developpment Stage
+## Development Stage
 
 !! Wait a minute !!
 
