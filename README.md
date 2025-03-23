@@ -1,20 +1,5 @@
 # Service Maker 
 
-## Development Stage
-
-!! Wait a minute !!
-
-This software is functionnal, but pretty basic right now. Consider this the alpha version of it.
-Basically, next steps are : 
-
-- Test coverage
-- CICD
-
-- ServiceMaker class that would streamline the usage of the program.
-- Refactoring of the cli.py with the ServiceMaker
-
-- Let's integrate your idea ?
-
 ## Description
 
 Service Maker is a lightweight program that acts as a CLI to create and
@@ -176,3 +161,19 @@ If poetry is installed, ./install.sh script should be good enough.
 The "module" version of this software is not yet available.
 I am currently working on a ServiceMaker object that will encapsulate the features
 to allow easy integration in a script.
+
+
+## Development Stage
+
+!! Wait a minute !!
+
+This software is functionnal, but pretty basic right now. Consider this the alpha version of it.
+Basically, next steps are : 
+
+- Test coverage
+- CICD
+
+- ServiceMaker class that would streamline the usage of the program.
+- Refactoring of the cli.py with the ServiceMaker
+
+- Let's integrate your idea ?
