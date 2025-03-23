@@ -64,7 +64,7 @@ class FileManager:
         with open(service_full_path, "r") as f:
             return f.readlines()
 
-    def merge(self) -> None:
+    def commit(self) -> None:
         """ overwrite systemd file (if exists else just moves
         the tmp file) with temp file. """
         cmd = f"sudo mv {self.tmp_name} /etc/systemd/system/{self.filename}"
@@ -73,5 +73,5 @@ class FileManager:
                                 text=True,
                                 capture_output=True)
         if result.stderr:
-            raise RuntimeError(f"Erreur lors du déplacement du fichier : {result.stderr}")
+            raise RuntimeError(f"Couldn't mv temp file {self.tmp_name}: {result.stderr}")
 

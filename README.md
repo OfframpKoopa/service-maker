@@ -1,23 +1,61 @@
 # Service Maker 
 
+## Description
+
 Service Maker is a lightweight program that acts as a CLI to create and
 update services for Linux (systemd).
 
 This aims at facilitating the handling of services through a terminal or
-a script.
+a script (developper tool is currently under development).
 
-It also writes into the file the entirety of the parameters for each section,
+It also writes into the file all of the parameters for each section,
 so the user don't have to guess or go to the documentation for a specific
 functionnality
+
+## Concept
+
+The idea is to basically use the service-maker commands followed by 
+the name and values of the directives we want in our service config
+file.
+
+for example, the ExecStart directive will be filled if :
+
+- --ExecStart "value here"
+
+is passed.
+
+## Action and meta arguments
+
+Actions are the command that triggers the logical operation that 
+the user wants to perform.
+
+There are 2 actions : 
+
+- create
+- update 
+
+Meta arguments are arguments or flags that are needed by the service-maker
+to function or offer advanced features.
+
+- --name meta argument is MANDATORY for every actions.
+
+Service directive arguments use the same casing  in the CLI they appear in the
+configuration file.
+
+Wheras meta arguments are simple lowercase arguments.
+
+
+NOTE: The casing will be ignored in future versions, as it is one of the 
+    thing that makes writing systemd configuration files a pain.
 
 ## A Simple Example
 
 ### Command
 ```bash
-service-maker create --Name "Test" --ExecStart "echo HelloWorld"
+service-maker create --name "Test" --ExecStart "echo HelloWorld"
 ```
 
-### Output in /etc/systemd/system/Test
+### Output in /etc/systemd/system/Test.service
 
 ```service file
 [Unit]
@@ -114,7 +152,12 @@ ExecStart=echo HelloWorld
 
 ## Installation 
 
-I recommend you use pipx to install the software "globally".
+The command is installed "globally" for the user with pipx.
+Poetry is required for handling dependencies.
 
-If you have poetry (recommended), you can run the ./install.sh script.
+If poetry is installed, ./install.sh script should be good enough.
 
+
+The "module" version of this software is not yet available.
+I am currently working on a ServiceMaker object that will encapsulate the features
+to allow easy integration in a script.

@@ -1,4 +1,5 @@
 import json
+from types import SimpleNamespace
 
 from service_maker.utils import get_arg_namespace
 from service_maker.doc_reference import DocReference
@@ -16,28 +17,47 @@ class UnitAdapter:
     """
     Takes one data type from models.py and can return
     its content as an instance of any other data type.
-    
-    - doc_reference is a dict with sections as key and 
-    a list of all their possible parameters as value.
-    - model is a model from models.py
 
-    The adapter works by converting every types inputed as
-    a Directives type. Because it's the easiest to work with
-    and transform to other types.
+    This object is a representation of the state of the
+    model passed at initialisation.
 
-    The sections, directives and raw_service attributes are
-    populated automatically at initialization.
-    
-    The "populate" method are internal because they need to
-    be called in the current order for the class to function.
-    
-    Implementing the UnitAdapter should not required any
-    other steps than initializing it.
+    If the state of the model is changed, the update(model)
+    method will update the current adapter instance with
+    the new model.
+        -> This is mainly done for semantic purpose, as it allows
+            to not instanciate a new adapter each time the data of 
+            a service is changed in the implementation.
 
+    Examples
+
+        # 1. Editing the smartd service
+
+            smartd = UnitAdapter(Directives(data))
+
+            raw_smartd = smartd.get_raw_service()
+            raw_smartd.append("# This is the last line of the service file")
+        
+            smartd.update(raw_smartd)
     """
     def __init__(self, model) -> None:
+        """
+        model : A data type from models.py.
+
+        The adapter works by converting every types inputed as
+        a Directives type, then populates the other type with it.
+
+        The sections, directives and raw_service attributes are
+        populated automatically at initialization.
+    
+        The "populate" methods are internal because they need to
+        be called in a specific order for the class to function.
+
+        """
         self.doc_reference = DocReference()
         self.sections_keys = ["Unit", "Service", "Install"]
+        self._populate(model)
+
+    def _populate(self, model) -> bool:
 
         self._sections = None
         self._directives = None
@@ -49,13 +69,7 @@ class UnitAdapter:
             self._directives = model
         if isinstance(model, Sections):
             self._directives = self._from_sections(model)
-        if not self._populate():
-            raise Exception(f"{model} could not be processed.")
 
-    def _populate(self) -> bool:
-        if not self._directives:
-            return False
-        
         self._populate_sections()
         self._populate_raw_service()
 
@@ -118,12 +132,11 @@ class UnitAdapter:
     def _populate_sections(self) -> None:
         raw_sections = {
                 "Meta": {
-                    "Name": self._directives.get("Name", ""),
+                    "name": self._directives.get("name", ""),
                     "action": self._directives.get("action", "")
                 }
             }
         for key in self.sections_keys:
-            print(key)
             raw_sections[key] = {} 
             for directive in self.doc_reference.get(key, ""):
                 if not directive in self._directives.keys():
@@ -188,5 +201,11 @@ class UnitAdapter:
         return self._raw_service
     
     def get_metadatas(self) -> dict:
-        return self.get_sections()["Meta"]
+        metadatas = self.get_sections()["Meta"]
+        parsed_metadatas = {key: value[0] for key, value in metadatas.items()} 
+        metadatas_np = SimpleNamespace(**parsed_metadatas)
+        return metadatas_np
+
+    def update(self, model):
+        self._populate(model)
 

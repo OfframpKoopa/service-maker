@@ -17,8 +17,13 @@ def get_arg_namespace(doc_reference: DocReference) -> argparse.Namespace:
     arg_parser = argparse.ArgumentParser()
     for section, params in doc_reference.items():
         for param in params:
+            if param == "name":
+                arg_parser.add_argument("--" + param, action="append", required=True)
+                continue
+            if param == "action":
+                arg_parser.add_argument("action", choices=CMDS, action="append")
+                continue
             arg_parser.add_argument("--" + param, action="append")
-    arg_parser.add_argument("action", choices=CMDS, action="append")
     return arg_parser.parse_args()
 
 

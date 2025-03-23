@@ -92,6 +92,7 @@
     "Alias"
   ],
   "Meta": [
-    "Name"
+    "name",
+    "action"
   ]
 }

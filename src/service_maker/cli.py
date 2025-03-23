@@ -25,22 +25,20 @@ def main() -> None:
     The UnitAdapter will allow any Commands
     class to perform any kind of operations.
     """
-
     doc_reference = DocReference()
 
     arg_np = get_arg_namespace(doc_reference)
     directives = Directives(vars(arg_np))
 
-    unit_adapter = UnitAdapter(directives)
-    action = directives.get("action", [""])[0]
-    command = command_invoker.get_command(action)
-    command.execute(unit_adapter)
+    service = UnitAdapter(directives)
+    metadatas = service.get_metadatas()
+    command = command_invoker.get_command(metadatas.action)
 
-#    try:
-#        command.execute()
-#        print(f"{command.arg_np.Name} successfully created/updated.")
-#    except Exception as e:
-#        print(f"[error] ServiceMaker encountered following issue: {e}")
+    try:
+        command.execute(service)
+        print(f"[INFO] {command.get_name()} successfully ran.")
+    except Exception as e:
+        print(f"[error] {command.get_name()} encountered following issue: {e}")
 
 
 if __name__ == '__main__':
